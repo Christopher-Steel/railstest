@@ -1,0 +1,9 @@
+<h1>Fizz Buzz Number list</h1>
+<p>The best place to get your favourite fizz buzz numbers!</p>
+<a href="<%= @prev_page_link %>">Previous page</a>
+<a href="<%= @next_page_link %>">Next page</a>
+<ul>
+  <% @list.each do |n| %>
+  <li><%= n %></li>
+  <% end %>
+</ul>
