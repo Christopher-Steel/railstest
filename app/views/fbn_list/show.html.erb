@@ -1,9 +1,22 @@
 <h1>Fizz Buzz Number list</h1>
 <p>The best place to get your favourite fizz buzz numbers!</p>
 <a href="<%= @prev_page_link %>">Previous page</a>
+<!--
+This form could've been created with rails helpers.
+I decided against it since it doesn't simplify the code,
+nor make it more efficient and had the downside of
+adding "utf8=✓" and "commit=ok" to the get request.
+(unnecessary and looks a bit ugly in the url bar)
+-->
+<form method="get" action="">
+  <label for="limit">results per page:</label>
+  <input type="text" name="limit" value="<%= @limit %>">
+  <input type="hidden" name="offset" value="<%= @offset %>">
+  <input type="submit" value="ok">
+</form>
 <a href="<%= @next_page_link %>">Next page</a>
 <ul>
-  <% @list.each do |n| %>
-  <li><%= n %></li>
+  <% @numbers.each do |n| %>
+    <li><%= n %></li>
   <% end %>
 </ul>
