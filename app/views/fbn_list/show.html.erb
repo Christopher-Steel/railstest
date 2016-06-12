@@ -16,7 +16,8 @@ adding "utf8=✓" and "commit=ok" to the get request.
 </form>
 <a href="<%= @next_page_link %>">Next page</a>
 <ul>
-  <% @numbers.each do |n| %>
-    <li><%= n %></li>
+  <% @numbers.each do |n, is_fav| %>
+    <li><%= n %><%= is_fav ? ' <- good stuff' : '' %></li>
   <% end %>
 </ul>
+<%= @numbers %>

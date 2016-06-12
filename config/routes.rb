@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  post 'favorites' => 'favorite#create'
+  delete 'favorites' => 'favorite#destroy'
+  get 'favorites' => 'favorite#index'
+
   root 'fbn_list#show'
 
   # The priority is based upon order of creation: first created -> highest priority.

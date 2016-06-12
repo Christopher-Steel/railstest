@@ -1,8 +1,8 @@
 class FizzBuzzNumber
   WORD_MATCHERS = [
     ['Fizz', 3],
-    ['Buzz', 5]                 
-  ] 
+    ['Buzz', 5]
+  ]
 
   def initialize(number)
     @number = number
@@ -12,6 +12,9 @@ class FizzBuzzNumber
   def to_i
     @number
   end
+  # defining to_int expresses that this class can be
+  # considered as equivalent to an int over simply being
+  # convertable to an int
   alias_method :to_int, :to_i
 
   def to_s
@@ -19,7 +22,7 @@ class FizzBuzzNumber
     WORD_MATCHERS.each do |word, multiplier|
       @string += word if @number.multiple_of?(multiplier)
     end
-    @string = @number.to_s if @string.empty? 
+    @string = @number.to_s if @string.empty?
     @string
   end
 

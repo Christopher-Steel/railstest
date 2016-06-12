@@ -16,21 +16,41 @@ class FbnListController < ApplicationController
     end
   end
 
+  # rather than just exposing @numbers and favorites they are
+  # bound together in a single array of pairs to make it easier
+  # to handle in the view
+  private def number_list_with_favs(numbers, favorites)
+    favorites = favorites.map(&:to_i)
+    numbers.map { |n| [n.to_s, favorites.include?(n.to_i)] }
+  end
+
+  # this converts the sub-arrays from the regular number list
+  # to hashes so that they come up as objects in JSON with
+  # named properties
+  private def json_number_list_with_favs(numbers, favorites)
+    number_list_with_favs(numbers, favorites).map do |el|
+      Hash[[:number, :favorite].zip(el)]
+    end
+  end
+
   def show
     sanitize_params
     @offset = params[:offset]
     @limit = params[:limit]
     last = @offset + @limit
 
-    @numbers = FizzBuzzNumber.range(@offset...last).map(&:to_s)
-    favourites = Favourite.where(number: @offset...last)
+    @numbers = FizzBuzzNumber.range(@offset...last)
+    favorites = Favorite.where(number: @offset...last)
+    @fav = favorites
     @prev_page_link = url_for(offset: @offset - @limit, limit: @limit)
     @next_page_link = url_for(offset: @offset + @limit, limit: @limit)
 
     respond_to do |format|
-      format.html
-      format.json { render json: @numbers }
+      format.html { @numbers = number_list_with_favs(@numbers, favorites)}
+      format.json do
+        @numbers = json_number_list_with_favs(@numbers, favorites)
+        render json: @numbers
+      end
     end
-
   end
 end
