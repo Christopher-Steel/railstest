@@ -21,15 +21,15 @@ class FbnListController < ApplicationController
   # to handle in the view
   private def number_list_with_favs(numbers, favorites)
     favorites = favorites.map(&:to_i)
-    numbers.map { |n| [n.to_s, favorites.include?(n.to_i)] }
+    numbers.map { |n| [n, favorites.include?(n.to_i)] }
   end
 
   # this converts the sub-arrays from the regular number list
   # to hashes so that they come up as objects in JSON with
   # named properties
   private def json_number_list_with_favs(numbers, favorites)
-    number_list_with_favs(numbers, favorites).map do |el|
-      Hash[[:number, :favorite].zip(el)]
+    number_list_with_favs(numbers, favorites).map do |nb, is_fav|
+      Hash[[:number, :favorite].zip([nb.to_s, is_fav])]
     end
   end
 

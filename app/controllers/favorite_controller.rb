@@ -5,11 +5,9 @@ class FavoriteController < ApplicationController
   end
 
   def destroy
-    if (fav = Favorite.find_by(number: params[:number])).nil?
-      head 404
-    else
+    unless (fav = Favorite.find_by(number: params[:number])).nil?
       fav.destroy
-      head :ok
     end
+    head :ok
   end
 end

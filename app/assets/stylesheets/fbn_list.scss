@@ -1,3 +1,24 @@
 // Place all the styles related to the FBNList controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+$enabled_color: orange;
+$disabled_color: gray;
+
+*[data-fav]:hover {
+  text-decoration: none;
+}
+
+*[data-fav="true"] {
+  color: $enabled_color;
+  &:hover {
+    color: $disabled_color;
+  }
+}
+
+*[data-fav="false"] {
+  color: $disabled_color;
+  &:hover {
+    color: $enabled_color;
+  }
+}
