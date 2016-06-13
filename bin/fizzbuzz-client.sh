@@ -32,14 +32,14 @@ handle_favorite() {
 }
 
 add_favorite() {
-    if [ $# -ne 2 ]; then
+    if [ $# -ne 1 ]; then
 	usage_exit "$ADD_FAVORITE_USAGE"
     fi
     handle_favorite POST "$1"
 }
 
 remove_favorite() {
-    if [ $# -ne 2 ]; then
+    if [ $# -ne 1 ]; then
 	usage_exit "$REMOVE_FAVORITE_USAGE"
     fi
     handle_favorite DELETE "$1"
