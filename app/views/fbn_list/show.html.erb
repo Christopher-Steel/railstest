@@ -18,9 +18,7 @@ adding "utf8=✓" and "commit=ok" to the get request.
 <ul>
   <% @numbers.each do |n, is_fav| %>
     <li>
-      <!-- <%= n %><i class="fa fa-star" href="#" data-nb="<%= n.to_i %>" data-fav="<%= is_fav.to_s %>"></i> -->
       <%= render partial: 'number', locals: {n: n, is_fav: is_fav} %>
     </li>
   <% end %>
 </ul>
-<%= @numbers %>
